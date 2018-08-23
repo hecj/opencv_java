@@ -17,7 +17,12 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
-
+/**
+ * toBufferedImage Mat转BufferedImage
+ * addWeighted 实现2张图像融合
+ * @author hecj
+ *
+ */
 public class AddingImagesTrackbar {
     private static final int ALPHA_SLIDER_MAX = 100;
     private int alphaVal = 0;
@@ -29,8 +34,8 @@ public class AddingImagesTrackbar {
 
     public AddingImagesTrackbar(String[] args) {
         //! [load]
-        String imagePath1 = "../data/LinuxLogo.jpg";
-        String imagePath2 = "../data/WindowsLogo.jpg";
+        String imagePath1 = "/data/data/LinuxLogo.jpg";
+        String imagePath2 = "/data/data/WindowsLogo.jpg";
         if (args.length > 1) {
             imagePath1 = args[0];
             imagePath2 = args[1];
@@ -52,6 +57,7 @@ public class AddingImagesTrackbar {
         frame = new JFrame("Linear Blend");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Set up the content pane.
+        // Mat 转 BufferedImage
         Image img = HighGui.toBufferedImage(matImgSrc2);
         addComponentsToPane(frame.getContentPane(), img);
         // Use the content pane's default BorderLayout. No need for
@@ -99,6 +105,7 @@ public class AddingImagesTrackbar {
     private void update() {
         double alpha = alphaVal / (double) ALPHA_SLIDER_MAX;
         double beta = 1.0 - alpha;
+        // 实现图片的线性融合
         Core.addWeighted(matImgSrc1, alpha, matImgSrc2, beta, 0, matImgDst);
         Image img = HighGui.toBufferedImage(matImgDst);
         imgLabel.setIcon(new ImageIcon(img));

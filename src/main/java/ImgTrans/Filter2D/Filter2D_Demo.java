@@ -27,7 +27,7 @@ class Filter2D_DemoRun {
         String window_name = "filter2D Demo";
 
         //! [load]
-        String imageName = ((args.length > 0) ? args[0] : "../data/lena.jpg");
+        String imageName = ((args.length > 0) ? args[0] : "/data/data/lena.jpg");
 
         // Load an image
         src = Imgcodecs.imread(imageName, Imgcodecs.IMREAD_COLOR);

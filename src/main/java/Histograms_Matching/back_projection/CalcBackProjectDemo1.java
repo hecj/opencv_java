@@ -36,7 +36,7 @@ class CalcBackProject1 {
     private static final int MAX_SLIDER = 180;
     private int bins = 25;
 
-    public CalcBackProject1(String[] args) {
+    public CalcBackProject1(String[] args) { 
         //! [Read the image]
         if (args.length != 1) {
             System.err.println("You must supply one argument that corresponds to the path to the image.");
@@ -158,7 +158,7 @@ class CalcBackProject1 {
     }
 }
 
-public class CalcBackProjectDemo1 {
+public class CalcBackProjectDemo1  {
     public static void main(String[] args) {
         // Load the native OpenCV library
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);

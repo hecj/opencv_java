@@ -35,7 +35,7 @@ class CornerHarris {
 
     public CornerHarris(String[] args) {
         /// Load source image and convert it to gray
-        String filename = args.length > 0 ? args[0] : "../data/building.jpg";
+        String filename = args.length > 0 ? args[0] : "/data/data/building.jpg";
         Mat src = Imgcodecs.imread(filename);
         if (src.empty()) {
             System.err.println("Cannot read image: " + filename);

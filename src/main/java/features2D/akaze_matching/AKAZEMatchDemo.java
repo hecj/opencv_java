@@ -28,9 +28,9 @@ import org.xml.sax.SAXException;
 class AKAZEMatch {
     public void run(String[] args) {
         //! [load]
-        String filename1 = args.length > 2 ? args[0] : "../data/graf1.png";
-        String filename2 = args.length > 2 ? args[1] : "../data/graf3.png";
-        String filename3 = args.length > 2 ? args[2] : "../data/H1to3p.xml";
+        String filename1 = args.length > 2 ? args[0] : "/data/data/graf1.png";
+        String filename2 = args.length > 2 ? args[1] : "/data/data/graf3.png";
+        String filename3 = args.length > 2 ? args[2] : "/data/data/H1to3p.xml";
         Mat img1 = Imgcodecs.imread(filename1, Imgcodecs.IMREAD_GRAYSCALE);
         Mat img2 = Imgcodecs.imread(filename2, Imgcodecs.IMREAD_GRAYSCALE);
         if (img1.empty() || img2.empty()) {

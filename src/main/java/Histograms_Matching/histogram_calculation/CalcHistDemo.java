@@ -17,7 +17,7 @@ import org.opencv.imgproc.Imgproc;
 class CalcHist {
     public void run(String[] args) {
         //! [Load image]
-        String filename = args.length > 0 ? args[0] : "../data/lena.jpg";
+        String filename = args.length > 0 ? args[0] : "/data/data/lena.jpg";
         Mat src = Imgcodecs.imread(filename);
         if (src.empty()) {
             System.err.println("Cannot read image: " + filename);
