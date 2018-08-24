@@ -3,11 +3,17 @@ package core.BasicGeometricDrawing;
 import org.opencv.core.*;
 import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.*;
 import java.util.List;
 
+/**
+ * 创建图片
+ * 圆形 矩形  多边形 等
+ * @author hecj
+ */
 class GeometricDrawingRun{
 
     private static final int W = 400;
@@ -27,22 +33,25 @@ class GeometricDrawingRun{
         /// 1. Draw a simple atom:
         /// -----------------------
         MyEllipse( atom_image, 90.0 );
+        
+        /*
         MyEllipse( atom_image, 0.0 );
         MyEllipse( atom_image, 45.0 );
         MyEllipse( atom_image, -45.0 );
-
-        /// 1.b. Creating circles
+		*/
+        /// 1.b. Creating circles 创建圆形
         MyFilledCircle( atom_image, new Point( W/2, W/2) );
         //! [draw_atom]
-
+        
         //! [draw_rook]
         /// 2. Draw a rook
         /// ------------------
         /// 2.a. Create a convex polygon
         MyPolygon( rook_image );
-
         //! [rectangle]
         /// 2.b. Creating rectangles
+        
+        // 绘制矩形
         Imgproc.rectangle( rook_image,
                 new Point( 0, 7*W/8 ),
                 new Point( W, W),
@@ -51,19 +60,21 @@ class GeometricDrawingRun{
                 8,
                 0 );
         //! [rectangle]
-
+        
         /// 2.c. Create a few lines
         MyLine( rook_image, new Point( 0, 15*W/16 ), new Point( W, 15*W/16 ) );
         MyLine( rook_image, new Point( W/4, 7*W/8 ), new Point( W/4, W ) );
         MyLine( rook_image, new Point( W/2, 7*W/8 ), new Point( W/2, W ) );
         MyLine( rook_image, new Point( 3*W/4, 7*W/8 ), new Point( 3*W/4, W ) );
         //! [draw_rook]
-
+        Imgcodecs.imwrite("/Users/hecj/Desktop/1.jpg", rook_image);
+        /*
         /// 3. Display your stuff!
         HighGui.imshow( atom_window, atom_image );
         HighGui.moveWindow( atom_window, 0, 200 );
         HighGui.imshow( rook_window, rook_image );
         HighGui.moveWindow( rook_window, W, 200 );
+        */
 
         HighGui.waitKey( 0 );
         System.exit(0);
@@ -74,13 +85,24 @@ class GeometricDrawingRun{
     /**
      * @function MyEllipse
      * @brief Draw a fixed-size ellipse with different angles
-     */
+     * 
+	    img 图像。
+		center 椭圆圆心坐标。
+		axes 轴的长度。
+		angle 偏转的角度。
+		start_angle 圆弧起始角的角度。.
+		end_angle 圆弧终结角的角度。
+		color 线条的颜色。
+		thickness 线条的粗细程度。
+		line_type 线条的类型,见CVLINE的描述。
+		shift 圆心坐标点和数轴的精度。
+	     */
     //! [my_ellipse]
     private void MyEllipse( Mat img, double angle ) {
         int thickness = 2;
         int lineType = 8;
         int shift = 0;
-
+        // 创建椭圆形
         Imgproc.ellipse( img,
                 new Point( W/2, W/2 ),
                 new Size( W/4, W/16 ),
@@ -102,7 +124,7 @@ class GeometricDrawingRun{
         int thickness = -1;
         int lineType = 8;
         int shift = 0;
-
+        // 创建圆形
         Imgproc.circle( img,
                 center,
                 W/32,
@@ -149,7 +171,7 @@ class GeometricDrawingRun{
 
         List<MatOfPoint> ppt = new ArrayList<MatOfPoint>();
         ppt.add(matPt);
-
+        // 填充多边形
         Imgproc.fillPoly(img,
                 ppt,
                 new Scalar( 255, 255, 255 ),

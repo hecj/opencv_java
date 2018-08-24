@@ -8,6 +8,19 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 
+/**
+ * 图片融合
+ * addWeighted
+ * https://blog.csdn.net/u011503970/article/details/18615537
+1、 第1个参数，输入图片1， 
+2、第2个参数，图片1的融合比例
+3、第3个参数，输入图片2
+4、第4个参数，图片2的融合比例
+5、第5个参数，偏差
+6、第6个参数，输出图片
+ * @author hecj
+ *
+ */
 class AddingImagesRun{
     public void run() {
         double alpha = 0.5; double beta; double input;
