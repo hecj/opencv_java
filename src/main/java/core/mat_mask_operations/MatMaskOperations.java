@@ -7,12 +7,16 @@ import org.opencv.core.Scalar;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-
+/**
+ * 掩模操作
+ * @author hecj
+ *
+ */
 class MatMaskOperationsRun {
 
     public void run(String[] args) {
 
-        String filename = "../data/lena.jpg";
+        String filename = "/Users/hecj/workspace/xylink/opencv_java/src/main/resources/data/lena.jpg";
 
         int img_codec = Imgcodecs.IMREAD_COLOR;
         if (args.length != 0) {

@@ -6,7 +6,11 @@ import org.opencv.imgcodecs.Imgcodecs;
 
 import java.util.List;
 import java.util.*;
-
+/**
+ * 离散傅里叶变换
+ * @author hecj
+ *
+ */
 class DiscreteFourierTransformRun{
     private void help() {
         System.out.println("" +
@@ -20,8 +24,8 @@ class DiscreteFourierTransformRun{
 
         help();
 
-        String filename = ((args.length > 0) ? args[0] : "../data/lena.jpg");
-
+        String filename = ((args.length > 0) ? args[0] : "/Users/hecj/workspace/xylink/opencv_java/src/main/resources/data/lena.jpg");
+        // IMREAD_GRAYSCALE 灰度图片
         Mat I = Imgcodecs.imread(filename, Imgcodecs.IMREAD_GRAYSCALE);
         if( I.empty() ) {
             System.out.println("Error opening image");
@@ -30,20 +34,26 @@ class DiscreteFourierTransformRun{
 
         //! [expand]
         Mat padded = new Mat();                     //expand input image to optimal size
+        // 功能：返回给定向量尺寸的傅里叶最优尺寸大小，意思就是为了提高离散傅立叶变换的运行速度，
+        // 需要扩充图像，需要扩充多少，就由这个函数计算得到。
+        System.out.println(I.rows());
+        System.out.println(I.cols());
         int m = Core.getOptimalDFTSize( I.rows() );
         int n = Core.getOptimalDFTSize( I.cols() ); // on the border add zero values
         Core.copyMakeBorder(I, padded, 0, m - I.rows(), 0, n - I.cols(), Core.BORDER_CONSTANT, Scalar.all(0));
         //! [expand]
-
+        
         //! [complex_and_real]
         List<Mat> planes = new ArrayList<Mat>();
         padded.convertTo(padded, CvType.CV_32F);
         planes.add(padded);
         planes.add(Mat.zeros(padded.size(), CvType.CV_32F));
         Mat complexI = new Mat();
+        // 通道合并
         Core.merge(planes, complexI);         // Add to the expanded another plane with zeros
         //! [complex_and_real]
-
+//        Imgcodecs.imwrite("/Users/hecj/Desktop/2.jpg", complexI);
+        
         //! [dft]
         Core.dft(complexI, complexI);         // this way the result may fit in the source matrix
         //! [dft]
@@ -51,8 +61,9 @@ class DiscreteFourierTransformRun{
         // compute the magnitude and switch to logarithmic scale
         // => log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
         //! [magnitude]
+        // 通道分离
         Core.split(complexI, planes);                               // planes.get(0) = Re(DFT(I)
-                                                                    // planes.get(1) = Im(DFT(I))
+        // 该函数用来计算二维矢量的幅值                                                             // planes.get(1) = Im(DFT(I))
         Core.magnitude(planes.get(0), planes.get(1), planes.get(0));// planes.get(0) = magnitude
         Mat magI = planes.get(0);
         //! [magnitude]
