@@ -1,20 +1,27 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.hechaojie</groupId>
-  <artifactId>opencv_java</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <dependencies>
-  	<dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hechaojie</groupId>
+	<artifactId>opencv_java</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<dependencies>
+		<dependency>
 			<groupId>opencv</groupId>
 			<artifactId>opencv</artifactId>
 			<version>3.4.2</version>
-			<scope>system</scope> 
+			<scope>system</scope>
 			<systemPath>${basedir}/lib/opencv-342.jar</systemPath>
 		</dependency>
-  </dependencies>
-  
-  <build>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.33</version>
+		</dependency>
+	</dependencies>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -36,5 +43,5 @@
 		</plugins>
 
 	</build>
-	
+
 </project>

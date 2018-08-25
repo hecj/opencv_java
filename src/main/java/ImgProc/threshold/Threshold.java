@@ -38,7 +38,7 @@ public class Threshold {
 
     public Threshold(String[] args) {
         //! [load]
-        String imagePath = "../data/stuff.jpg";
+        String imagePath = "/data/data/stuff.jpg";
         if (args.length > 0) {
             imagePath = args[0];
         }

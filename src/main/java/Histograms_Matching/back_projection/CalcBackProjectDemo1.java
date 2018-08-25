@@ -38,12 +38,12 @@ class CalcBackProject1 {
 
     public CalcBackProject1(String[] args) { 
         //! [Read the image]
-        if (args.length != 1) {
-            System.err.println("You must supply one argument that corresponds to the path to the image.");
-            System.exit(0);
-        }
+//        if (args.length != 1) {
+//            System.err.println("You must supply one argument that corresponds to the path to the image.");
+//            System.exit(0);
+//        }
 
-        Mat src = Imgcodecs.imread(args[0]);
+        Mat src = Imgcodecs.imread("/Users/hecj/Desktop/timg.jpeg");
         if (src.empty()) {
             System.err.println("Empty image: " + args[0]);
             System.exit(0);
@@ -59,7 +59,7 @@ class CalcBackProject1 {
         hue = new Mat(hsv.size(), hsv.depth());
         Core.mixChannels(Arrays.asList(hsv), Arrays.asList(hue), new MatOfInt(0, 0));
         //! [Use only the Hue value]
-
+        Imgcodecs.imwrite("/Users/hecj/Desktop/imgRGBA.png", hue);
         // Create and set up the window.
         frame = new JFrame("Back Projection 1 demo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
