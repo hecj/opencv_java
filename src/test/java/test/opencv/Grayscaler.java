@@ -18,10 +18,10 @@ public class Grayscaler {
 		Imgcodecs.imwrite("/Users/hecj/Desktop/car/WechatIMG18223_3.jpeg", mat);
 		
 //		// 第二种 转换灰度图像
-//		Mat src = Imgcodecs.imread("/data/data/WindowsLogo.jpg", Imgcodecs.IMREAD_UNCHANGED);
-//		Mat dst = new Mat();
-//		Imgproc.cvtColor(src, dst, Imgcodecs.IMREAD_GRAYSCALE);
-//		Imgcodecs.imwrite("/Users/hecj/Desktop/WindowsLogo2.jpg", mat);
+		Mat src = Imgcodecs.imread("/data/data/WindowsLogo.jpg", Imgcodecs.IMREAD_UNCHANGED);
+		Mat dst = new Mat();
+		Imgproc.cvtColor(src, dst, Imgproc.COLOR_BGR2GRAY);
+		Imgcodecs.imwrite("/Users/hecj/Desktop/WindowsLogo2.jpg", mat);
 
 	}
 
