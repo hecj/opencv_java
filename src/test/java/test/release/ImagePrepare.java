@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
@@ -26,9 +27,15 @@ public class ImagePrepare {
 	
 	public static void dealImage(String dir,String file) {
 		Mat src = Imgcodecs.imread(dir+"/"+file);
+		
+		int newRows = 300;
+        int newCols = (int)((double)newRows/src.size().width * src.size().height);
+        Mat size = new Mat();
+        Imgproc.resize(src, size, new Size(newRows, newCols));
+        
 		// 灰度
 		Mat hui = new Mat();
-		Imgproc.cvtColor(src, hui, Imgproc.COLOR_BGR2GRAY);
+		Imgproc.cvtColor(size, hui, Imgproc.COLOR_BGR2GRAY);
 		// 二值
 		Mat erzhi = new Mat();
 		Imgproc.threshold(hui, erzhi, 0, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);// 灰度图像二值化
