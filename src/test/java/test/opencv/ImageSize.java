@@ -10,7 +10,7 @@ import org.opencv.imgproc.Imgproc;
  * 图片大小处理
  * @author hecj
  */
-public class ImageSize {
+public class ImageSize { 
 
     public static void main(String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);

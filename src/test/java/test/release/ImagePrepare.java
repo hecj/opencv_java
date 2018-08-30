@@ -9,7 +9,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 /**
- * 图片批量预处理
+ * 图片批量预处理 
  * @author hecj
  */
 public class ImagePrepare {
@@ -27,12 +27,11 @@ public class ImagePrepare {
 	
 	public static void dealImage(String dir,String file) {
 		Mat src = Imgcodecs.imread(dir+"/"+file);
-		
+		// 大小
 		int newRows = 300;
         int newCols = (int)((double)newRows/src.size().width * src.size().height);
         Mat size = new Mat();
         Imgproc.resize(src, size, new Size(newRows, newCols));
-        
 		// 灰度
 		Mat hui = new Mat();
 		Imgproc.cvtColor(size, hui, Imgproc.COLOR_BGR2GRAY);
