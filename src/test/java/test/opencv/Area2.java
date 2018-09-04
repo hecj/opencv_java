@@ -7,15 +7,12 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
-import org.opencv.core.RotatedRect;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-
-import com.alibaba.fastjson.JSON;
 
 /**
  * 文字区域查找
@@ -30,7 +27,7 @@ public class Area2 {
 	 */
 	public static void main(String[] args) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		Mat src = Imgcodecs.imread("/Users/hecj/Desktop/n3.jpeg");
+		Mat src = Imgcodecs.imread("/Users/hecj/Desktop/3.jpeg");
 		Mat gray = new Mat();
 		// 灰色
 		Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
@@ -168,11 +165,10 @@ public class Area2 {
 				continue;
 			}
 			// 过滤 横条的矩形(如宽大于高的5倍)
-			if(( maxX - minX) > (maxY - minY)*5d ) {
+			if(( maxX - minX) > (maxY - minY)*8d ) {
 				continue;
 			}
 			
-			System.out.println(maxX);
 			Point[] targetPoints = new Point[] {
 					new Point(minX,minY),
 					new Point(maxX,minY),
@@ -185,9 +181,21 @@ public class Area2 {
 		Imgproc.drawContours(src, rectangleList, -1, new Scalar(0,0, 255));
 		Imgcodecs.imwrite("/Users/hecj/Desktop/drawContours.jpeg", src);
 		
-		for (MatOfPoint cnt : contoursResult) {
+		// 截取特征目标
+		for(int i=0;i<rectangleList.size();i++) {
+			MatOfPoint matOfPoint = rectangleList.get(i);
+			List<Point> points = matOfPoint.toList();
+			int x = (int)points.get(0).x;
+			int y = (int)points.get(0).y;
+			int width = (int)(points.get(1).x-points.get(0).x);
+			int height = (int)(points.get(2).y-points.get(0).y);
+	        Mat target = new Mat(src, new Rect(x, y, width, height));
+	        Imgcodecs.imwrite("/Users/hecj/Desktop/"+i+".jpeg", target);
+		}
+		
+//		for (MatOfPoint cnt : contoursResult) {
 			// 计算该轮廓的面积
-			double area = Imgproc.contourArea(cnt);
+//			double area = Imgproc.contourArea(cnt);
 //			// 面积小的都筛选掉
 //			if (area < 1000) {
 //				continue;
@@ -200,7 +208,7 @@ public class Area2 {
 //	        if(height > width * 1.2):
 //	            continue
 //	         region.append(box)
-		}
+//		}
 		return null;
 	}
 
